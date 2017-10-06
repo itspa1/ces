@@ -19,8 +19,8 @@
     </body>
     
     <script>
-        $("#button").click(function(){
-           $.ajax({url: "getClasses",type: "post",success: function(response){
+        $(document).ready(function(){
+           $.ajax({url: "classes",type: "post",success: function(response){
                    console.log(response);
            }});
         });
