@@ -18,7 +18,7 @@
     ResultSet rs;
     int i = st.executeUpdate("insert into users(name,username,password,email) values ('"+name+"','"+user+"','"+pwd+"','"+email+"')" );
     if (i > 0) {
-        session.setAttribute("userid", user);
+        session.setAttribute("username", user);
         response.sendRedirect("postRegister.html");
         out.print("Registration Successfull!");
     } else {

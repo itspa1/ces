@@ -13,7 +13,7 @@
     </head>
     <body>
         <h2 align="center" >Welcome</h2>
-        <% if ((session.getAttribute("userid") == null) || (session.getAttribute("userid") == "")) { %>
+        <% if ((session.getAttribute("username") == null) || (session.getAttribute("username") == "")) { %>
     You are not logged in<br/>
     <a href="registration.html">Register</a>
     <a href="login.html">Login</a>

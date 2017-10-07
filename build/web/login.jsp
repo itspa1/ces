@@ -18,8 +18,7 @@
     PreparedStatement psm = con.prepareStatement(query);
     ResultSet rs = psm.executeQuery();
     if(rs.next()){
-        session.setAttribute("userid",rs.getInt(1));
-        session.setAttribute("username",rs.getString(2));
+        session.setAttribute("username",rs.getString(1));
         out.println("Welcome" + username);
         response.sendRedirect("index.jsp"); 
     }

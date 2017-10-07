@@ -1,6 +1,6 @@
 <%-- 
     Document   : updateStudent
-    Created on : 28 Sep, 2017, 7:27:36 PM
+    Created on : 7 Oct, 2017, 8:53:35 PM
     Author     : pk
 --%>
 
@@ -9,19 +9,33 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>UpdateStudent</title>
+        <title>Update Student Details</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
-        <h2>Update your student details</h2>
-        <button id="button">Button</button>
-        <select id="select"></select>
+                <h2>Update your student details</h2>
+        
+        <form action="createStudent" method="post">
+            <span>USN </span><input type="text" name="usn" placeholder="USN"><br><br>
+            <span>Class</span>
+            <select id="select" name="class">
+                <option value="0">Select</option>
+            </select>
+            <input type="hidden" name="username" value="${sessionScope.username}"/>    
+        </form>
+        
     </body>
     
     <script>
         $(document).ready(function(){
            $.ajax({url: "classes",type: "post",success: function(response){
-                   console.log(response);
+              response = JSON.parse(response);
+              $.each(response,function(key,value){
+                  $(value).each(function(index,val){
+                     var option = $("<option>",{value: val,text: val});
+                     $("#select").append(option);
+                  });
+              });
            }});
         });
         
