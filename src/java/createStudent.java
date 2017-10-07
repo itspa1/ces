@@ -6,6 +6,13 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -69,7 +76,27 @@ public class createStudent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        try {
+            PrintWriter out = response.getWriter();
+            String usn = request.getParameter("usn");
+            String username = request.getParameter("username");
+            String classname = request.getParameter("class");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ces",
+                    "root", "8277123123");
+            Statement st = con.createStatement();
+            ResultSet rs;
+            int i = st.executeUpdate("insert into students(usn,username,class_name) values('"+usn+"','"+username+"','"+classname+"')");
+            if(i > 0){
+                response.sendRedirect("index.jsp");
+                out.print("Successfully updated details");
+            }else{
+                response.sendRedirect("updateStudent.jsp");
+                out.print("some error occured!!");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(createStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -20,8 +20,10 @@
             <span>Class</span>
             <select id="select" name="class">
                 <option value="0">Select</option>
-            </select>
-            <input type="hidden" name="username" value="${sessionScope.username}"/>    
+            </select><br><br>
+            <input type="hidden" name="username" value="${sessionScope.username}"/> 
+            <input type="submit" value="Submit" />
+            <input type="reset" value="Reset" />
         </form>
         
     </body>
