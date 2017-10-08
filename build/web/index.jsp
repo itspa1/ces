@@ -20,8 +20,8 @@
         <%} else {%>    
     Welcome <%= session.getAttribute("username")%>
     <a href='logout.jsp'>Log out</a>
-    <% } %>
+    <% } %><br><br>
         
-        
+    <a href="createBundle.jsp">Create/Add Questions</a>
     </body>
 </html>

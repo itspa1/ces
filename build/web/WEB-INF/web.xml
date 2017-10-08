@@ -8,6 +8,10 @@
         <servlet-name>createStudent</servlet-name>
         <servlet-class>createStudent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>createBundle</servlet-name>
+        <servlet-class>createBundle</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>classes</servlet-name>
         <url-pattern>/classes</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>createStudent</servlet-name>
         <url-pattern>/createStudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createBundle</servlet-name>
+        <url-pattern>/createBundle</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
