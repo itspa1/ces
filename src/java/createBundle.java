@@ -77,6 +77,7 @@ public class createBundle extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            PrintWriter out = response.getWriter();
             String username = request.getParameter("username");
             String classname = request.getParameter("class");
             Class.forName("com.mysql.jdbc.Driver");
@@ -86,9 +87,9 @@ public class createBundle extends HttpServlet {
             ResultSet rs;
             int i = st.executeUpdate("insert into bundles(user_name,classname) values('"+username+"','"+classname+"')");
             if(i > 0){
-                response.sendRedirect("index.jsp");
+                out.println("<p>Created successully</p>");
             }else{
-                response.sendRedirect("createBundle.jsp");
+                out.println("<p>Error Occured</p>");
             }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(createBundle.class.getName()).log(Level.SEVERE, null, ex);

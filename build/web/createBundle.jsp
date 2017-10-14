@@ -15,9 +15,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.8.2/jquery.modal.min.css" type="text/css" media="screen" />
     </head>
     <body>
-        <div>
-            <h2 align="center">Add questions form</h2>
-            <form method="post" action="createBundle">
+        <h2 align="center">Add questions form</h2>
+        <div id="main" class="modal" style="display:none;" >
+            <form method="post" action="createBundle" id="modal">
                 <input type="hidden" name="username" value="${sessionScope.username}">
                 <span>Select Class </span>
                 <select id="select" name="class">
@@ -25,13 +25,19 @@
                 </select><br><br>
                 <input type="submit" value="Submit" />
                 <input type="reset" value="Reset" />
-            </form>
+            </form>    
         </div>
+                <a href="#main" data-modal>Form</a>
     </body>
     <script>
         $(document).ready(function(){
+            $('a[data-modal]').click(function(event){
+                $(this).modal();
+                return false; //to reset the url back
+            });      
            $.ajax({url: "classes",type: "post",success: function(response){
               response = JSON.parse(response);
+              //console.log(response);
               $.each(response,function(key,value){
                   $(value).each(function(index,val){
                      var option = $("<option>",{value: val,text: val});
@@ -39,6 +45,19 @@
                   });
               });
            }});
+        });
+        var form = $("#modal");
+        form.submit(function(){ 
+           $.ajax({
+               type: form.attr('method'),
+               url: form.attr('action'),
+               data: form.serialize(),
+               success: function(response){
+                   $("#main").empty();
+                   $("#main").html(response);
+               }
+           }); 
+           return false;//to stop redirect
         });
         
     </script>
