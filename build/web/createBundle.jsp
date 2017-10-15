@@ -10,9 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Questions</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.8.2/jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.8.2/jquery.modal.min.css" type="text/css" media="screen" />
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="css/jquery.modal.min.css" type="text/css" media="screen" />
     </head>
     <body>
         <h2 align="center">Add questions form</h2>
@@ -28,6 +28,9 @@
             </form>    
         </div>
                 <a href="#main" data-modal>Form</a>
+                <div id="sub" class="modal" style="display: none;">
+                    Content to do
+                </div>        
     </body>
     <script>
         $(document).ready(function(){
@@ -53,8 +56,9 @@
                url: form.attr('action'),
                data: form.serialize(),
                success: function(response){
-                   $("#main").empty();
-                   $("#main").html(response);
+                   //$("#main").empty();
+                   //$("#main").html(response);
+                   $("#sub").modal();
                }
            }); 
            return false;//to stop redirect

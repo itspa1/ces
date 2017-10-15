@@ -9,7 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <title>Index</title>
     </head>
     <body>
         <h2 align="center" >Welcome</h2>
