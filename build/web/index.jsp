@@ -30,19 +30,18 @@
        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ces","root","8277123123");
        Statement st = con.createStatement();
        String query = "select * from bundles";
-       PreparedStatement psm = con.prepareStatement(query);
-       ResultSet rs = psm.executeQuery();
-       ResultSet rs1 = st.executeQuery(query);
-       if(!rs.last()){
+       ResultSet rs = st.executeQuery(query);
+       if(rs.next() == false){
     %>
-    <p> no bundles yet. </p>
-    <% } else{ 
-    while(rs1.next()){%>
-    <p><%= rs1.getString(4) %></p>
-    <% }}
-    rs1.close();
-    rs.close();%>
-    
+    <p>No Bundles Yet.</p>
+    <% } else { %>
+    <h2>Listing Bundles</h2>
+      <%  do{ %>
+    <li><a href=<%="/course/viewBundle.jsp?id=" + rs.getInt(1)%>><%= rs.getString(4) %></a></li>
+     <%     }while(rs.next());
+            } 
+        rs.close();%>
+    <br>
     <a href="createBundle.jsp">Create/Add Questions</a>
     </body>
 </html>
