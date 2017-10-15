@@ -11,14 +11,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Questions</title>
         <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="js/jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
-        <link rel="stylesheet" href="css/jquery.modal.min.css" type="text/css" media="screen" />
+        <script src="js/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="css/jquery.modal.css" type="text/css" media="screen" />
     </head>
     <body>
         <h2 align="center">Add questions form</h2>
-        <div id="main" class="modal" style="display:none;" >
-            <form method="post" action="createBundle" id="modal">
+        <div id="main" >
+            <form method="post" action="createBundle" id="modal" class="modal" style="display:none;">
                 <input type="hidden" name="username" value="${sessionScope.username}">
+                <span>Enter Name or subject</span>
+                <input type="text" name="name" placeholder="Enter Name or Subject"><br><br>
                 <span>Select Class </span>
                 <select id="select" name="class">
                 <option value="0">Select</option>
@@ -27,7 +29,7 @@
                 <input type="reset" value="Reset" />
             </form>    
         </div>
-                <a href="#main" data-modal>Form</a>
+                <a href="#modal" data-modal>Form</a>
                 <div id="sub" class="modal" style="display: none;">
                     Content to do
                 </div>        
@@ -63,6 +65,8 @@
            }); 
            return false;//to stop redirect
         });
-        
+        form.on($.modal.AFTER_CLOSE,function(event,modal){
+            form[0].reset();
+        });
     </script>
 </html>

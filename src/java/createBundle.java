@@ -80,12 +80,13 @@ public class createBundle extends HttpServlet {
             PrintWriter out = response.getWriter();
             String username = request.getParameter("username");
             String classname = request.getParameter("class");
+            String name = request.getParameter("name");
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ces",
                     "root", "8277123123");
             Statement st = con.createStatement();
             ResultSet rs;
-            int i = st.executeUpdate("insert into bundles(user_name,classname) values('"+username+"','"+classname+"')");
+            int i = st.executeUpdate("insert into bundles(user_name,classname,name) values('"+username+"','"+classname+"','"+name+"')");
             if(i > 0){
                 out.println("<p>Created successully</p>");
             }else{
