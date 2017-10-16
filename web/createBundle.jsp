@@ -11,8 +11,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Questions</title>
         <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
         <link rel="stylesheet" href="css/jquery.modal.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" />
     </head>
     <body>
         <h2 align="center">Add questions form</h2>

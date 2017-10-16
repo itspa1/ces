@@ -11,12 +11,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
         <link rel="stylesheet" href="css/jquery.modal.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" />
         <title>Index</title>
     </head>
     <body>
-        <h2 align="center" >Welcome</h2>
+        <h2 align="center" class="jumbotron">Welcome</h2>
         <% if ((session.getAttribute("username") == null) || (session.getAttribute("username") == "")) { %>
     You are not logged in<br/>
     <a href="registration.html">Register</a>
@@ -25,7 +27,7 @@
     Welcome <%= session.getAttribute("username")%>
     <a href='logout.jsp'>Log out</a>
     <% } %><br><br>
-    
+    <div class="container-fluid">
     <% Class.forName("com.mysql.jdbc.Driver"); 
        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ces","root","8277123123");
        Statement st = con.createStatement();
@@ -42,6 +44,7 @@
             } 
         rs.close();%>
     <br>
-    <a href="createBundle.jsp">Create/Add Questions</a>
+    </div>
+    <a href="createBundle.jsp">Create/Add Questions</a> 
     </body>
 </html>
