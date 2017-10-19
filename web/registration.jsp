@@ -15,7 +15,6 @@
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ces",
             "root", "8277123123");
     Statement st = con.createStatement();
-    ResultSet rs;
     int i = st.executeUpdate("insert into users(name,username,password,email) values ('"+name+"','"+user+"','"+pwd+"','"+email+"')" );
     if (i > 0) {
         session.setAttribute("username", user);

@@ -23,11 +23,23 @@
          Class.forName("com.mysql.jdbc.Driver");
          Connection con  = DriverManager.getConnection("jdbc:mysql://localhost:3306/ces","root","8277123123");
          Statement st = con.createStatement();
+         Statement qt = con.createStatement();
          String query = "select * from bundles where id = " + id;
          ResultSet rs = st.executeQuery(query);
          rs.next();
+         ResultSet ques = qt.executeQuery("select * from questions where bundle_id = " + rs.getString(1));
         %>
         <h2 align="center"><%= rs.getString(4) %></h2>
-        <% rs.close(); %>
+        
+        <p>Listing Questions</p>
+        <% if(!ques.next()){%>
+        <p>No Questions yet.</p>
+        <% }else{ 
+        do{%>
+        <li><%= ques.getString(2) %></li>
+        <% }while(rs.next()); %>
+        <% } %>
+        <% rs.close(); 
+            ques.close(); %>
     </body>
 </html>

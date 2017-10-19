@@ -26,4 +26,5 @@
         out.println("Invalid password/username");
         response.sendRedirect("login.html");
     }
+    rs.close();
 %>
