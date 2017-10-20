@@ -4,9 +4,11 @@
     Author     : pk
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.sql.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="z" tagdir="/WEB-INF/tags" %>
-<z:layout pageTitle="test">
+<c:set var="page">
     <header class="masthead">
       <div class="header-content">
         <div class="header-content-inner">
@@ -17,7 +19,7 @@
         </div>
       </div>
     </header>
-    
+  
     <section class="bg-primary" id="about">
       <div class="container">
         <div class="row">
@@ -30,4 +32,38 @@
         </div>
       </div>
     </section>
+    
+    <% if ((session.getAttribute("username") == null) || (session.getAttribute("username") == "")) { %>
+    You are not logged in<br/>
+    <a href="registration.html">Register</a>
+    <a href="login.html">Login</a>
+        <%} else {%>    
+    Welcome <%= session.getAttribute("username")%>
+    <a href='logout.jsp'>Log out</a>
+    <% } %><br><br>
+    <div class="container-fluid">
+    <% Class.forName("com.mysql.jdbc.Driver"); 
+       Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ces","root","8277123123");
+       Statement st = con.createStatement();
+       String query = "select * from bundles";
+       ResultSet rs = st.executeQuery(query);
+       if(rs.next() == false){
+    %>
+    <p>No Bundles Yet.</p>
+    <% } else { %>
+    <h2>Listing Bundles</h2>
+      <%  do{ %>
+    <li><a href=<%="/course/viewBundle.jsp?id=" + rs.getInt(1)%>><%= rs.getString(4) %></a></li>
+     <%     }while(rs.next());
+            } 
+        rs.close();%>
+    <br>
+    </div>
+    <a href="createBundle.jsp">Create/Add Questions</a>
+</c:set>
+
+<z:layout pageTitle="test">
+    <jsp:attribute name="content">
+        ${page}
+    </jsp:attribute>
 </z:layout>

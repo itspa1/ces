@@ -5,9 +5,9 @@
 --%>
 
 <%@tag description="put the tag description here" pageEncoding="UTF-8"%>
-<%@ tag body-content="scriptless" %>
 <%-- The list of normal or fragment attributes can be specified here: --%>
 <%@ attribute name="pageTitle" required="true" type="java.lang.String" %>
+<%@attribute name="content" fragment="true" %>
 
 <%-- any content can be specified here e.g.: --%>
 <html>
@@ -54,8 +54,7 @@
       </div>
     </nav>
 
-  
-    <jsp:doBody/>
+     <jsp:invoke fragment="content"></jsp:invoke>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper/popper.min.js"></script>
