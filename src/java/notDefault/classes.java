@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package notDefault;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -67,7 +68,7 @@ public class classes extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 
     /**
@@ -92,25 +93,24 @@ public class classes extends HttpServlet {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ces",
                     "root", "8277123123");
-            Statement st = con.createStatement();
-            String query =  "select * from classes";
-            PreparedStatement psm = con.prepareStatement(query);
-            ResultSet rs = psm.executeQuery();
-            JsonObjectBuilder json = Json.createObjectBuilder();
-            JsonArrayBuilder arr = Json.createArrayBuilder();
-            while(rs.next()){
-                arr.add(rs.getString("name"));
+            try (Statement st = con.createStatement()) {
+                String query =  "select * from classes";
+                PreparedStatement psm = con.prepareStatement(query);
+                try (ResultSet rs = psm.executeQuery()) {
+                    JsonObjectBuilder json = Json.createObjectBuilder();
+                    JsonArrayBuilder arr = Json.createArrayBuilder();
+                    while(rs.next()){
+                        arr.add(rs.getString("name"));
+                    }
+                    json.add("response",arr);
+                    JsonObject obj = json.build();
+                    out.println(obj);
+                }
             }
-            json.add("response",arr);
-            JsonObject obj = json.build();
-            out.println(obj);
-            rs.close();
-            st.close();
             con.close();    
         } catch (SQLException ex) {
             Logger.getLogger(classes.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
     }
 
     /**

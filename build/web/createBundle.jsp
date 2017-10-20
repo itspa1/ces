@@ -4,20 +4,11 @@
     Author     : pk
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create Questions</title>
-        <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
-        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="css/jquery.modal.css" type="text/css" media="screen" />
-    </head>
-    <body>
-        <h2 align="center">Add questions form</h2>
+<%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
+
+<c:set var="page">
         <div id="main" >
             <form method="post" action="createBundle" id="modal" class="modal" style="display:none;">
                 <input type="hidden" name="username" value="${sessionScope.username}">
@@ -34,9 +25,8 @@
                 <a href="#modal" data-modal >Form</a>
                 <div id="sub" class="modal" style="display: none;">
                     Content to do
-                </div>        
-    </body>
-    <script>
+                </div>
+                <script>
         $(document).ready(function(){
             $('a[data-modal]').click(function(event){
                 $(this).modal();
@@ -70,5 +60,11 @@
         form.on($.modal.AFTER_CLOSE,function(event,modal){
             form[0].reset();
         });
-    </script>
-</html>
+        </script>
+</c:set>
+                
+<z:layout pageTitle="Create Bundle">
+    <jsp:attribute name="content">
+        ${page}
+    </jsp:attribute>
+</z:layout>

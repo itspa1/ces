@@ -10,7 +10,7 @@
 <%@ attribute name="pageTitle" required="true" type="java.lang.String" %>
 <%@attribute name="content" fragment="true" %>
 
-<c:set var="page">
+<c:set var="default">
          <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
@@ -22,10 +22,10 @@
           <ul class="navbar-nav ml-auto">
             <% if ((session.getAttribute("username") == null) || (session.getAttribute("username") == "")) { %>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="login.html">Login</a>
+              <a class="nav-link js-scroll-trigger" href="login.jsp">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="registration.html">Register</a>
+              <a class="nav-link js-scroll-trigger" href="registration.jsp">Register</a>
             </li>
             <% }else{ %>
             <li class="nav-item">
@@ -57,12 +57,9 @@
 
     <!-- Custom styles for this template -->
     <link href="css/creative.min.css" rel="stylesheet">
-    <title>${pageTitle}</title>
-</head>
-<body id="page-top">
-      ${page}
-     <jsp:invoke fragment="content"></jsp:invoke>
-    <!-- Bootstrap core JavaScript -->
+     <script src="js/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
+      <link rel="stylesheet" href="css/jquery.modal.css" type="text/css" media="screen" />
+      <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper/popper.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -74,5 +71,10 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
+    <title>${pageTitle}</title>
+</head>
+<body id="page-top">
+      ${default}
+     <jsp:invoke fragment="content"></jsp:invoke>
 </body>
 </html>

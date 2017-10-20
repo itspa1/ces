@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package notDefault;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,12 +18,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 /**
  *
  * @author pk
  */
-public class createStudent extends HttpServlet {
+public class createBundle extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class createStudent extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet createStudent</title>");            
+            out.println("<title>Servlet createBundle</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet createStudent at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet createBundle at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +62,7 @@ public class createStudent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 
     /**
@@ -78,24 +78,22 @@ public class createStudent extends HttpServlet {
             throws ServletException, IOException {
         try {
             PrintWriter out = response.getWriter();
-            String usn = request.getParameter("usn");
             String username = request.getParameter("username");
             String classname = request.getParameter("class");
+            String name = request.getParameter("name");
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ces",
                     "root", "8277123123");
             Statement st = con.createStatement();
             ResultSet rs;
-            int i = st.executeUpdate("insert into students(usn,username,class_name) values('"+usn+"','"+username+"','"+classname+"')");
+            int i = st.executeUpdate("insert into bundles(user_name,classname,name) values('"+username+"','"+classname+"','"+name+"')");
             if(i > 0){
-                response.sendRedirect("index.jsp");
-                out.print("Successfully updated details");
+                out.println("<p>Created successully</p>");
             }else{
-                response.sendRedirect("updateStudent.jsp");
-                out.print("some error occured!!");
+                out.println("<p>Error Occured</p>");
             }
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(createStudent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(createBundle.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -1,30 +1,53 @@
 <%-- 
     Document   : login
-    Created on : 15 Sep, 2017, 10:11:26 PM
+    Created on : 20 Oct, 2017, 4:17:30 PM
     Author     : pk
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import ="java.sql.*" %>
-<%@page import="javax.sql.*" %>
-<% 
-    String username = request.getParameter("uname");
-    String password = request.getParameter("pass");
-    Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ces",
-            "root", "8277123123");
-    Statement st = con.createStatement();
-    String query = "select * from users where username='" + username + "' and password='" + password + "'";
-    PreparedStatement psm = con.prepareStatement(query);
-    ResultSet rs = psm.executeQuery();
-    if(rs.next()){
-        session.setAttribute("username",rs.getString(1));
-        out.println("Welcome" + username);
-        response.sendRedirect("index.jsp"); 
-    }
-    else{
-        out.println("Invalid password/username");
-        response.sendRedirect("login.html");
-    }
-    rs.close();
-%>
+<%@taglib prefix="z" tagdir="/WEB-INF/tags" %>
+
+<c:set var="page">
+    <section class="bg-primary" id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <form method="post" action="login">
+            <center>
+            <table border="1" width="30%" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th colspan="2">Enter Login Information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>User Name</td>
+                        <td><input type="text" name="uname" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="password" name="pass" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Not Registered??<a href="registration.jsp">Register Here</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            </center>
+        </form>
+          </div>
+        </div>
+      </div>
+    </section>
+</c:set>
+<z:layout pageTitle="Login">
+    <jsp:attribute name="content">
+        ${page}
+    </jsp:attribute>
+</z:layout>
