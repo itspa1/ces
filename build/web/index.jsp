@@ -32,15 +32,6 @@
         </div>
       </div>
     </section>
-    
-    <% if ((session.getAttribute("username") == null) || (session.getAttribute("username") == "")) { %>
-    You are not logged in<br/>
-    <a href="registration.html">Register</a>
-    <a href="login.html">Login</a>
-        <%} else {%>    
-    Welcome <%= session.getAttribute("username")%>
-    <a href='logout.jsp'>Log out</a>
-    <% } %><br><br>
     <div class="container-fluid">
     <% Class.forName("com.mysql.jdbc.Driver"); 
        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ces","root","8277123123");
